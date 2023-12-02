@@ -322,6 +322,7 @@ def model_summary_string(keras_model, mode='keras', show_parameters=True, displa
             'Bidirectional': '<span class="label label-danger">{0:s}</span>'
         }
 
+        import tensorflow as tf
         from tensorflow import keras
         from distutils.version import LooseVersion
         import tensorflow.keras.backend as keras_backend
@@ -342,10 +343,10 @@ def model_summary_string(keras_model, mode='keras', show_parameters=True, displa
 
         for layer_id, layer in enumerate(keras_model.layers):
             connections = []
-            if LooseVersion(keras.__version__) >= LooseVersion('2.7.0'):
+            if LooseVersion(tf.__version__) >= LooseVersion('2.7.0'):
                 pass
 
-            elif LooseVersion(keras.__version__) >= LooseVersion('2.1.3'):
+            elif LooseVersion(tf.__version__) >= LooseVersion('2.1.3'):
                 for node_index, node in enumerate(layer._inbound_nodes):
                     for i in range(len(node.inbound_layers)):
                         inbound_layer = node.inbound_layers[i].name
@@ -396,7 +397,7 @@ def model_summary_string(keras_model, mode='keras', show_parameters=True, displa
             table_data['activation'].append(str(config.get('activation', '-')))
             table_data['initialization'].append(init)
 
-        if LooseVersion(keras.__version__) >= LooseVersion('2.7.0'):
+        if LooseVersion(tf.__version__) >= LooseVersion('2.7.0'):
             trainable_count = 0
             for p in keras_model.trainable_weights:
                 trainable_count += keras_backend.count_params(p)
