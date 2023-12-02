@@ -1167,10 +1167,10 @@ class AudioContainer(ContainerMixin, FileMixin):
             raise ImportError(message)
 
         try:
-            from youtube_dl.utils import ExtractorError
+            from yt_dlp.utils import ExtractorError
 
         except ImportError:
-            message = '{name}: Unable to import youtube_dl module. You can install it with `pip install youtube-dl`.'.format(
+            message = '{name}: Unable to import yt_dlp module. You can install it with `pip install yt-dlp`.'.format(
                 name=self.__class__.__name__
             )
 
